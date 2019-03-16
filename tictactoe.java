@@ -2,123 +2,87 @@ import java.io.*;
 import java.util.*;
 
 public class tictactoe{
+
+	public tictactoe(){
+	}
+
 	public static void main(String[] args){
 		Scanner sys = new Scanner(System.in);
-		makegrid();
-		String first = decideTurn(sys);
-		System.out.println(first);
-		int count = 0;
-		String[] array = new String[9];
-		String pSymbol;
-		String cSymbol;
-		if(first.equals("Player")){
-			pSymbol = "X";
-			cSymbol = "O";
+		tictactoe newTic = new tictactoe();
+		newTic.makegrid();
+		char[] array = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+		for(int i = 0; i < array.length; i++){
+			if(i % 2 == 0){
+				System.out.println("Player 1, choose your coordinate: ");
+				int choice1 = sys.nextInt();
+				while(array[choice1] != ' '){
+					System.out.println("That spot is taken or it is out of bounds, please choose another.");
+					choice1 = sys.nextInt();
+				}
+				array[choice1] = 'X';
+			}
+			else{
+				System.out.println("Player 2, choose your coordinate: ");
+				int choice2 = sys.nextInt();
+				while(array[choice2] != ' '){
+					System.out.println("That spot is taken or it s out of bounds, please choose another.");
+					choice2 = sys.nextInt();
+				}
+				array[choice2] = 'O';
+			}
+			newTic.remakeGrid(array);
+			newTic.checkForWin();
 		}
-		else{
-			pSymbol = "O";
-			cSymbol = "X";
-		}
-		for(int i = 0; i<9; i++){
-			
-		}
-		/*while(count < 9){
-			int coordinate = sys.nextInt();
+		System.out.println("Game over.");
+	}
 
-			remakeGrid();
-		}*/
+
+	public void makegrid(){
+		System.out.println("_ _|_ _|_ _");
+		System.out.println("_ _|_ _|_ _");
+		System.out.println("   |   |   ");
 	}
-	public static void makegrid(){
-		System.out.println("_|_|_");
-		System.out.println("_|_|_");
-		System.out.println(" | |");
-	}
-	public static void remakeGrid(String[] array){
+
+	public void remakeGrid(char[] array){
 		for(int i = 0; i<array.length; i++){
-			if(array[i] != null){
-				switch(i){
-					case 0:
-						System.out.print("_" + array[i] + "_");
-						break;
-					case 1:
-						System.out.print("|" + "_" + array[i] + "_" + "|");
-						break;
-					case 2:
-						System.out.println("_" + array[i] + "_");
-						break;
-					case 3:
-						System.out.print("_" + array[i] + "_");
-						break;
-					case 4:
-						System.out.print("|" + "_" + array[i] + "_" + "|");
-						break;
-					case 5:
-						System.out.println("_" + array[i] + "_");
-						break;
-					case 6:
-						System.out.print(" " + array[i] + " ");
-						break;
-					case 7:
-						System.out.print("| " + array[i] + " |");
-						break;
-					case 8:
-						System.out.println(" " + array[i] + " ");
-						break;	
+			if(array[i] != ' '){
+				if(i == 0 || i == 2 || i == 3 || i == 5){
+					System.out.print("_" + array[i] + "_");
+				}
+				else if(i == 6 || i == 8){
+					System.out.print(" " + array[i] + " ");
+				}
+				else if(i == 7){
+					System.out.print("| " + array[i] + " |");
+				}
+				else{
+					System.out.print("|" + "_" + array[i] + "_" + "|");
+				}
+				if(i == 2 || i == 5){
+					System.out.println();
 				}
 			}
 			else{
-				switch(i){
-					case 0:
-						System.out.print("_" + " " + "_");
-						break;
-					case 1:
-						System.out.print("|" + "_" + " " + "_" + "|");
-						break;
-					case 2:
-						System.out.println("_" + " " + "_");
-						break;
-					case 3:
-						System.out.print("_" + " " + "_");
-						break;
-					case 4:
-						System.out.print("|" + "_" + " " + "_" + "|");
-						break;
-					case 5:
-						System.out.println("_" + " " + "_");
-						break;
-					case 6:
-						System.out.print(" " + " " + " ");
-						break;
-					case 7:
-						System.out.print("| " + " " + " |");
-						break;
-					case 8:
-						System.out.println(" " + " " + " ");
-						break;
+				if(i == 0 || i == 2 || i == 3 || i == 5){
+					System.out.print("_ _");
+				}
+				else if(i == 6 || i == 8){
+					System.out.print("   ");
+				}
+				else if(i == 7){
+					System.out.print("|   |");
+				}
+				else{
+					System.out.print("|_ _|");
+				}
+				if(i == 2 || i == 5){
+					System.out.println();
 				}
 			}
 		} 
 	}
-	public static String decideTurn(Scanner sys){
-		System.out.println("Choose a number between 1 and 100");
-		Random rand = new Random();
-		int playerChoice = sys.nextInt();
-		while(playerChoice < 1 || playerChoice > 100){
-			System.out.println("Please enter a valid number: ");
-			playerChoice = sys.nextInt();
-		}
-		int computerChoice = rand.nextInt(100);
-		computerChoice += 1;
-		int outcome = rand.nextInt(100);
-		outcome += 1;
-		int closerPlayerChoice = Math.abs(outcome - playerChoice);
-		int closerComputerChoice = Math.abs(outcome - computerChoice);
-		//System.out.println("playerChoice: " + playerChoice + "computerChoice: " + computerChoice + "outcome: " + outcome);
-		if(closerPlayerChoice < closerComputerChoice){
-			return "Player";
-		}
-		else{
-			return "Computer";
-		}
+	
+	public void checkForWin(char[] array){
+		if(array[])
 	}
 }
